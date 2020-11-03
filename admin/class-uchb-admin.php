@@ -77,6 +77,7 @@ class Uchb_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/uchb-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'uikit', plugin_dir_url( __FILE__ ) . 'css/uikit.min.css', array(), '3.5.9', 'all' );
 
 	}
 
@@ -100,6 +101,8 @@ class Uchb_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/uchb-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'uikit', plugin_dir_url( __FILE__ ) . 'js/uikit.min.js', array(), '3.5.9', false );
+		wp_enqueue_script( 'uikit-icons', plugin_dir_url( __FILE__ ) . 'js/uikit-icons.min.js', array(), '3.5.9', false );
 
 	}
 
