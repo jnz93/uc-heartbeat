@@ -52,6 +52,9 @@ class Uchb_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		// Adc menu item
+		add_action('admin_menu', array($this, 'create_admin_page'));
+
 	}
 
 	/**
@@ -100,4 +103,30 @@ class Uchb_Admin {
 
 	}
 
+	/**
+	 * Create page admin of plugin
+	 * 
+	 * @since 1.0.0
+	 */
+	public function create_admin_page()
+	{
+		$page_title = 'Unitycode Heartbeat';
+		$menu_title = 'UC Heartbeat';
+		$menu_slug 	= 'uchb';
+		$capability = 10;
+		$icon_url 	= 'dashicons-store';
+		$position 	= 10;
+
+		add_menu_page($page_title, $menu_title, $capability, $menu_slug, array($this, 'construct_admin_page'), $icon_url, $position);
+	}
+
+	/**
+	 * Construct page admin function
+	 * 
+	 * @since 1.0.0
+	 */
+	public function construct_admin_page()
+	{
+		echo 'Construa a página aqui';
+	}
 }
