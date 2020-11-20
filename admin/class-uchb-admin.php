@@ -180,7 +180,7 @@ class Uchb_Admin {
 													<textarea class="uk-input" id="uchb_project_details"></textarea>
 												</div>
 											</div>
-											<div class="uk-width-1-2">
+											<div class="uk-width-1-3">
 												<label class="uk-form-label" for="uchb_project_types">Tipo do projeto</label>
 												<div class="uk-form-controls">
 													<select class="uk-select" id="uchb_project_types">
@@ -189,7 +189,7 @@ class Uchb_Admin {
 													</select>
 												</div>
 											</div>
-											<div class="uk-width-1-2">
+											<div class="uk-width-1-3">
 												<label class="uk-form-label" for="uchb_project_customer">Cliente</label>
 												<div class="uk-form-controls">
 													<select class="uk-select" id="uchb_project_customer">
@@ -198,10 +198,10 @@ class Uchb_Admin {
 													</select>
 												</div>
 											</div>
-											<div class="uk-width-1-1">
+											<div class="uk-width-1-3">
 												<label class="uk-form-label" for="uchb_project_proposal">Proposta Unitycode</label>
 												<div class="uk-form-controls">
-													<textarea class="uk-input" id="uchb_project_proposal"></textarea>
+													<input type="file" class="uk-input" id="uchb_project_proposal">
 												</div>
 											</div>
 											<div class="uk-width-1-4">
