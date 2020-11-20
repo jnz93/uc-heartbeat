@@ -1,14 +1,14 @@
 # README
 
 ## UC HEARTBEAT
-Plugin de gerenciamento de projetos, orçamentos e finanças da Unitycode.tech.
+O plugin facilitara a vida de pequenas agências digitais independente do segmento. Com ele será possível: cadastrar projetos, cadastrar clientes, enviar notificações de cobrança via e-mail e SMS além de facilitar o gerenciamento financeiro com o poderoso woocommerce integrado com a nossa solução custom.
 
-## Documentações das apis utilizadas
+## Documentações
 * [Woocommerce](https://woocommerce.github.io/woocommerce-rest-api-docs/)
 * [Wordpress Plugin API](https://codex.wordpress.org/Plugin_API)
 * [Framework Front-End UiKit](https://getuikit.com/docs/introduction)
 
-## Módulos do sistema
+## Módulos
 * Projetos
 * * Cadastro de Projeto
 * * Gestão do projeto
@@ -19,7 +19,7 @@ Plugin de gerenciamento de projetos, orçamentos e finanças da Unitycode.tech.
 * * Entradas e Saídas
 * * Funcionário(s)
 
-## Instalação e configuração
+## Instalação
 1) Faça o upload no diretório ou instale o plugin de forma comum pelo painel do wordpress
 
 -----------
