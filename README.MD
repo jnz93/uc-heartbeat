@@ -10,14 +10,14 @@ O plugin facilitara a vida de pequenas agências digitais independente do segmen
 
 ## Módulos
 * Projetos
-* * Cadastro de Projeto
-* * Gestão do projeto
+ * Cadastro de Projeto
+ * Gestão do projeto
 * Cliente
-* * Cadastro de clientes
+ * Cadastro de clientes
 * Financeiro
-* * Cobrança
-* * Entradas e Saídas
-* * Funcionário(s)
+ * Cobrança
+ * Entradas e Saídas
+ * Funcionário(s)
 
 ## Instalação
 1) Faça o upload no diretório ou instale o plugin de forma comum pelo painel do wordpress
