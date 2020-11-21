@@ -58,6 +58,8 @@ class Uchb_Admin {
 		// Register post types function
 		add_action('init', array($this, 'uchb_create_post_types'));
 
+		// Register taxonomies
+		add_action('init', array($this, 'uchb_create_taxonomies'));
 	}
 
 	/**
@@ -176,5 +178,75 @@ class Uchb_Admin {
 				'rewrite'     => array( 'slug' => 'projects' ),
 			)
 		);
+	}
+
+	/**
+	 * Register taxonomies
+	 * 
+	 * @since 1.0.0
+	 */
+	public function uchb_create_taxonomies()
+	{
+		// Status do projeto (uchb_projects)
+		$tax_status_name = 'Status';
+		$tax_status_sing_name = 'Status';
+		$labels = array(
+			'name'              => _x( $tax_status_name, 'taxonomy general name', 'textdomain' ),
+			'singular_name'     => _x( $tax_status_sing_name, 'taxonomy singular name', 'textdomain' ),
+			'search_items'      => __( 'Procurar ' . $$tax_status_name, 'textdomain' ),
+			'all_items'         => __( 'Todos '. $tax_status_name , 'textdomain' ),
+			'parent_item'       => __( $tax_status_sing_name . ' Pai', 'textdomain' ),
+			'parent_item_colon' => __( $tax_status_sing_name . ' Pai:', 'textdomain' ),
+			'edit_item'         => __( 'Editar ' . $tax_status_sing_name, 'textdomain' ),
+			'update_item'       => __( 'Atualizar ' . $tax_status_sing_name, 'textdomain' ),
+			'add_new_item'      => __( 'Adicionar novo ' . $tax_status_sing_name, 'textdomain' ),
+			'new_item_name'     => __( 'Novo nome de ' . $tax_status_sing_name, 'textdomain' ),
+			'menu_name'         => __( $tax_status_name, 'textdomain' ),
+		);
+	 
+		$args = array(
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'status' ),
+		);	 
+		register_taxonomy( 'project_status', array( 'uchb_projects' ), $args );
+
+		// Limpar variaveis
+		unset($labels);
+		unset($args);
+		
+		// Tipos de projeto (uchb_projects)
+		$tax_status_name = 'Categorias de projetos';
+		$tax_status_sing_name = 'Categoria de projeto';
+		$labels = array(
+			'name'              => _x( $tax_status_name, 'taxonomy general name', 'textdomain' ),
+			'singular_name'     => _x( $tax_status_sing_name, 'taxonomy singular name', 'textdomain' ),
+			'search_items'      => __( 'Procurar ' . $$tax_status_name, 'textdomain' ),
+			'all_items'         => __( 'Todos '. $tax_status_name , 'textdomain' ),
+			'parent_item'       => __( $tax_status_sing_name . ' Pai', 'textdomain' ),
+			'parent_item_colon' => __( $tax_status_sing_name . ' Pai:', 'textdomain' ),
+			'edit_item'         => __( 'Editar ' . $tax_status_sing_name, 'textdomain' ),
+			'update_item'       => __( 'Atualizar ' . $tax_status_sing_name, 'textdomain' ),
+			'add_new_item'      => __( 'Adicionar novo ' . $tax_status_sing_name, 'textdomain' ),
+			'new_item_name'     => __( 'Novo nome de ' . $tax_status_sing_name, 'textdomain' ),
+			'menu_name'         => __( $tax_status_name, 'textdomain' ),
+		);
+	 
+		$args = array(
+			'hierarchical'      => true,
+			'labels'            => $labels,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array( 'slug' => 'project-type' ),
+		);	 
+		register_taxonomy( 'project_type', array( 'uchb_projects' ), $args );
+
+		// Limpar variaveis
+		unset($labels);
+		unset($args);
 	}
 }
