@@ -55,6 +55,9 @@ class Uchb_Admin {
 		// Adc menu item
 		add_action('admin_menu', array($this, 'create_admin_page'));
 
+		// Register post types function
+		add_action('init', array($this, 'uchb_create_post_types'));
+
 	}
 
 	/**
@@ -152,5 +155,26 @@ class Uchb_Admin {
 		// include templates
 		require_once plugin_dir_path( __FILE__ ) . 'partials/templates/uchb-register-project.php';
 		require_once plugin_dir_path( __FILE__ ) . 'partials/templates/uchb-register-customer.php';
+	}
+
+	/**
+	 * Register post types
+	 * 
+	 * @since 1.0.0
+	 */
+	public function uchb_create_post_types()
+	{
+		// Post type: Projetos
+		register_post_type('uchb_projects',
+			array(
+				'labels'      => array(
+					'name'          => __( 'Projetos', 'textdomain' ),
+					'singular_name' => __( 'Projeto', 'textdomain' ),
+				),
+				'public'      => true,
+				'has_archive' => true,
+				'rewrite'     => array( 'slug' => 'projects' ),
+			)
+		);
 	}
 }
