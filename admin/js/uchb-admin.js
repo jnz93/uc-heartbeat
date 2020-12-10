@@ -30,3 +30,88 @@
 	 */
 
 })( jQuery );
+
+/**
+ * Function checkForm
+ * 
+ * Recebe um elemento form busca os inputs e faz uma verificação simples, no final retorna o resultado
+ * 
+ * @param form = el form html
+ */
+function checkForm(form) {
+	'use strict';
+	var elements = form.find('.uk-input, .uk-select'),
+		count = 0;
+
+	elements.each(function(index){
+		if (jQuery(this).val().length === 0) {
+			jQuery(this).addClass('uk-form-danger');
+			count++;
+		} else {
+			jQuery(this).addClass('uk-form-success');
+		}
+	});
+	return count;
+}
+
+/**
+ * Função registerProject
+ * 
+ * 
+ * @param ajaxUrl = url admin ajax
+ */
+function registerProject(ajaxUrl){
+	'use strict';
+	var form = jQuery('#modal-projetos').find('form');
+	
+	var projectName 		= jQuery('#uchb_project_name').val(),
+		projectDescription 	= jQuery('#uchb_project_description').val(),
+		projectSpecs 		= jQuery('#uchb_project_specs').val(),
+		projectDetails 		= jQuery('#uchb_project_details').val(),
+		projectType 		= jQuery('#uchb_project_types').val(),
+		projectCustomer 	= jQuery('#uchb_project_customer').val(),
+		projectProposal 	= jQuery('#uchb_project_proposal').val(),
+		projectDeadline 	= jQuery('#uchb_project_deadline').val(),
+		projectHours 		= jQuery('#uchb_project_hours').val(),
+		projectPrice 		= jQuery('#uchb_project_price').val(),
+		projectStatus 		= jQuery('#uchb_project_status').val();
+
+	var dataToSend = projectName 
+					+ '||' + projectDescription 
+					+ '||' + projectSpecs 
+					+ '||' + projectDetails 
+					+ '||' + projectType 
+					+ '||' + projectCustomer
+					+ '||' + projectProposal
+					+ '||' + projectDeadline
+					+ '||' + projectHours
+					+ '||' + projectPrice
+					+ '||' + projectStatus;
+
+	// Send to backend
+	if (checkForm(form) === 0) {
+		jQuery.ajax({
+			type: 'POST',
+			url: ajaxUrl,
+			data: {
+				action: 'uchb_create_project',
+				data: dataToSend
+			},
+			success: function(res)
+			{
+				UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Projeto cadastrado com sucesso!', status: 'success', pos: 'bottom-center'});
+			},
+			error: function(res)
+			{
+				UIkit.notification({message: '<span uk-icon=\'icon: close\'></span> Projeto cadastrado com sucesso!', status: 'error', pos: 'bottom-center'});
+			}
+		}).done(function() {
+			var modal = jQuery('#modal-projetos');
+
+			modal.fadeOut('slow', function(){
+				form[0].reset();
+				UIkit.notification.closeAll();
+			});
+		});
+	}
+}

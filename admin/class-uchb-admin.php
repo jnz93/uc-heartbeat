@@ -60,6 +60,10 @@ class Uchb_Admin {
 
 		// Register taxonomies
 		add_action('init', array($this, 'uchb_create_taxonomies'));
+
+
+		// Ajax actions
+		add_action('wp_ajax_uchb_create_project', array($this, 'uchb_create_project_by_ajax')); // executed when logged in
 	}
 
 	/**
@@ -248,5 +252,41 @@ class Uchb_Admin {
 		// Limpar variaveis
 		unset($labels);
 		unset($args);
+	}
+
+
+	/**
+	 * Create project via ajax
+	 * Recebe os dados do formulário via ajax, faz o tratamento e cria um novo projeto.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function uchb_create_project_by_ajax()
+	{
+		$data_received = $_POST['data'];
+		$data = explode('||', $data_received);
+		
+		$postarr = array(
+			'post_title'	=> $data[0],
+			'post_excerpt'	=> $data[1],
+			'post_content'	=> $data[2],
+			'post_status'	=> 'publish',
+			'post_type'		=> 'uchb_projects',
+		);
+		$post_id = wp_insert_post( $postarr );
+		
+		if (!is_wp_error($post_id)) :
+			wp_set_post_terms( $post_id, $data[4], 'project_type');
+			wp_set_post_terms( $post_id, $data[10], 'project_status');
+
+			update_post_meta( $post_id, 'uchb_project_details', $data[3] );
+			update_post_meta( $post_id, 'uchb_project_customer', $data[5] );
+			update_post_meta( $post_id, 'uchb_project_proposal', $data[6] );
+			update_post_meta( $post_id, 'uchb_project_deadline', $data[7] );
+			update_post_meta( $post_id, 'uchb_project_hours', $data[8] );
+			update_post_meta( $post_id, 'uchb_project_price', $data[9] );
+
+		endif;
+		die();
 	}
 }
