@@ -64,6 +64,7 @@ class Uchb_Admin {
 
 		// Ajax actions
 		add_action('wp_ajax_uchb_create_project', array($this, 'uchb_create_project_by_ajax')); // executed when logged in
+		add_action('wp_ajax_uchb_register_customer', array($this, 'uchb_register_customer_by_ajax')); // executed when logged in
 	}
 
 	/**
@@ -288,5 +289,31 @@ class Uchb_Admin {
 
 		endif;
 		die();
+	}
+
+	/**
+	 * Register new customer
+	 * Recebe os dados do formulário via ajax, faz o tratamento e cria um novo cliente.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function uchb_register_customer_by_ajax()
+	{
+		$data_received = $_POST['data'];
+		$data = explode('||', $data_received);
+
+		$username 	= $data[3];
+		$password 	= '000000';
+		$email 		= $data[3];
+
+		$user_id = wp_create_user( $username, $password, $email );
+
+		if(is_wp_error($user_id)) :
+			update_user_meta( $user_id, 'uchb_customer_company', $data[1] );
+			update_user_meta( $user_id, 'uchb_customer_doc', $data[2] );
+			update_user_meta( $user_id, 'uchb_customer_phone', $data[4] );
+			update_user_meta( $user_id, 'uchb_customer_branch', $data[5] );
+			update_user_meta( $user_id, 'uchb_customer_address', $data[6] );
+		endif;
 	}
 }

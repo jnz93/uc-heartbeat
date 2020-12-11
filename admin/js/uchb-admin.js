@@ -108,6 +108,60 @@ function registerProject(ajaxUrl){
 		}).done(function() {
 			var modal = jQuery('#modal-projetos');
 
+			modal.fadeOut('fast', function(){
+				form[0].reset();
+				UIkit.notification.closeAll();
+			});
+		});
+	}
+}
+
+/**
+ * Função registerCustomer
+ * 
+ * @param ajaxUrl = url admin ajax
+ */
+function registerCustomer(ajaxUrl){
+	'use strict';
+	var form = jQuery('#modal-clientes').find('form');
+
+	var customerName 		= jQuery('#uchb_client_name').val(),
+		customerCompany 	= jQuery('#uchb_client_company').val(),
+		customerDoc 		= jQuery('#uchb_client_doc').val(),
+		customerEmail 		= jQuery('#uchb_client_email').val(),
+		customerTel 		= jQuery('#uchb_client_telnumber').val(),
+		customerBranch 		= jQuery('#uchb_client_branch').val(),
+		customerAddress 	= jQuery('#uchb_client_address').val();
+
+	// Send to backend
+	if (checkForm(form) === 0){
+		var dataToSend = customerName
+					+ '||' + customerCompany
+					+ '||' + customerDoc
+					+ '||' + customerEmail
+					+ '||' + customerTel
+					+ '||' + customerBranch
+					+ '||' + customerAddress;
+
+		// Send to backend
+		jQuery.ajax({
+			type: 'POST',
+			url: ajaxUrl,
+			data: {
+				action: 'uchb_register_customer',
+				data: dataToSend
+			},
+			success: function(res)
+			{
+				UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Cliente cadastrado com sucesso!', status: 'success', pos: 'bottom-center'});
+			},
+			error: function(res)
+			{
+				UIkit.notification({message: '<span uk-icon=\'icon: close\'></span> Houve um problema com o cadastro. Tente novamente! <br /> Err: ' + res, status: 'error', pos: 'bottom-center'});
+			}
+		}).done(function() {
+			var modal = jQuery('#modal-clientes');
+
 			modal.fadeOut('slow', function(){
 				form[0].reset();
 				UIkit.notification.closeAll();

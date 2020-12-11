@@ -11,6 +11,8 @@
  * @package    Uchb
  * @subpackage Uchb/admin/partials/templates/
  */
+
+$ajax_url = admin_url('admin-ajax.php');
 ?>
 <div id="modal-clientes" class="uk-modal-container" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
@@ -51,18 +53,6 @@
                     </div>
                 </div>
                 <div class="uk-width-1-2">
-                    <label class="uk-form-label" for="uchb_client_type">Tipo Cliente</label>
-                    <div class="uk-form-controls">
-                        <select class="uk-select" id="uchb_project_type">
-                            <option>Option 01</option>
-                            <option>Option 02</option>
-                            <option>Option 03</option>
-                            <option>Option 04</option>
-                            <option>Option 05</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="uk-width-1-2">
                     <label class="uk-form-label" for="uchb_client_branch">Ramo da Empresa</label>
                     <div class="uk-form-controls">
                         <input class="uk-input" id="uchb_client_branch" type="text" placeholder="Ex: Telecomunicações">
@@ -78,7 +68,7 @@
         </div>
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-            <button class="uk-button uk-button-primary" type="button">Salvar Projeto</button>
+            <button class="uk-button uk-button-primary" type="button" onclick="registerCustomer('<?php echo $ajax_url; ?>')">Salvar Projeto</button>
         </div>
     </div>
 </div>
