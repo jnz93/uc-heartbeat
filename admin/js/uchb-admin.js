@@ -169,3 +169,58 @@ function registerCustomer(ajaxUrl){
 		});
 	}
 }
+
+/**
+ * Função registerBudget
+ * 
+ * @param ajaxUrl = url admin ajax
+ */
+function registerBudget(ajaxUrl){
+	'user strict';
+	var form = jQuery('#modal-orcamentos').find('form');
+
+	var budgetName 			= jQuery('#uchb_budget_name').val(),
+		budgetDescription 	= jQuery('#uchb_budget_description').val(),
+		budgetHours 		= jQuery('#uchb_budget_hours').val(),
+		budgetDeadline 		= jQuery('#uchb_budget_deadline').val(),
+		budgetPrice 		= jQuery('#uchb_budget_price').val(),
+		budgetCustomerEmail = jQuery('#uchb_budget_client_email').val(),
+		budegtCustomerName 	= jQuery('#uchb_budget_client_name').val();
+
+	if (checkForm(form) === 0){
+		var dataToSend = budgetName
+					+ '||' + budgetDescription
+					+ '||' + budgetHours
+					+ '||' + budgetDeadline
+					+ '||' + budgetPrice
+					+ '||' + budgetCustomerEmail
+					+ '||' + budegtCustomerName;
+
+		// Send to back end
+		jQuery.ajax({
+			type: 'POST',
+			url: ajaxUrl,
+			data: {
+				action: 'uchb_register_budget',
+				data: dataToSend
+			},
+			success: function(res)
+			{
+				UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Orçamento cadastrado com sucesso!', status: 'success', pos: 'bottom-center'});
+			},
+			error: function(res)
+			{
+				UIkit.notification({message: '<span uk-icon=\'icon: close\'></span> Houve um problema com o cadastro. Tente novamente! <br /> Err: ' + res, status: 'error', pos: 'bottom-center'});
+			}
+		}).done(function(){
+			var modal = jQuery('#modal-orcamentos');
+
+			modal.fadeOut('slow', function(){
+				form[0].reset();
+				UIkit.notification.closeAll();
+			});
+		});
+	} else {
+		console.log('Inválido!');
+	}
+}

@@ -65,6 +65,7 @@ class Uchb_Admin {
 		// Ajax actions
 		add_action('wp_ajax_uchb_create_project', array($this, 'uchb_create_project_by_ajax')); // executed when logged in
 		add_action('wp_ajax_uchb_register_customer', array($this, 'uchb_register_customer_by_ajax')); // executed when logged in
+		add_action('wp_ajax_uchb_register_budget', array($this, 'uchb_register_budget_by_ajax')); // executed when logged in
 	}
 
 	/**
@@ -162,6 +163,7 @@ class Uchb_Admin {
 		// include templates
 		require_once plugin_dir_path( __FILE__ ) . 'partials/templates/uchb-register-project.php';
 		require_once plugin_dir_path( __FILE__ ) . 'partials/templates/uchb-register-customer.php';
+		require_once plugin_dir_path( __FILE__ ) . 'partials/templates/uchb-register-budget.php';
 	}
 
 	/**
@@ -183,6 +185,18 @@ class Uchb_Admin {
 				'rewrite'     => array( 'slug' => 'projects' ),
 			)
 		);
+
+		// Post type: Orçamento
+		register_post_type( 'uchb_budgets',
+		array(
+			'labels' 		=> array(
+				'name'			=> __( 'Orçamentos', 'textdomain' ),
+				'singular_name'	=> __( 'Orçamento', 'textdomain' ),
+			),
+			'public'		=> true,
+			'has_archive' 	=> true,
+			'rewrite'		=> array( 'slug', 'budgets' ),
+		));
 	}
 
 	/**
@@ -315,5 +329,35 @@ class Uchb_Admin {
 			update_user_meta( $user_id, 'uchb_customer_branch', $data[5] );
 			update_user_meta( $user_id, 'uchb_customer_address', $data[6] );
 		endif;
+		die();
+	}
+
+	/**
+	 * Register new budget
+	 * Recebe os dados do formulário via ajax, faz o tratamento e cria um novo cliente.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function uchb_register_budget_by_ajax()
+	{
+		$data_received = $_POST['data'];
+		$data = explode('||', $data_received);
+
+		$postarr = array(
+			'post_title'	=> $data[0],
+			'post_content'	=> $data[1],
+			'post_status'	=> 'publish',
+			'post_type'		=> 'uchb_budgets',
+		);
+		$post_id = wp_insert_post( $postarr );
+
+		if(!is_wp_error($post_id)):
+			update_post_meta( $post_id, 'uchb_budget_hours', $data[2] );
+			update_post_meta( $post_id, 'uchb_budget_deadline', $data[3] );
+			update_post_meta( $post_id, 'uchb_budget_price', $data[4] );
+			update_post_meta( $post_id, 'uchb_budget_client_email', $data[5] );
+			update_post_meta( $post_id, 'uchb_budget_client_name', $data[6] );
+		endif;
+		die();
 	}
 }
