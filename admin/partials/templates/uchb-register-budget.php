@@ -18,7 +18,7 @@ $ajax_url = admin_url('admin-ajax.php');
     <div class="uk-modal-dialog uk-modal-body">
         <button class="uk-modal-close-default" type="button" uk-close></button>
         <div class="uk-modal-header">
-            <h2 class="uk-modal-title">Cadastrar Orçamento</h2>
+            <h2 class="uk-modal-title">Novo Orçamento</h2>
         </div>
         <div class="uk-modal-body">
             <form class="uk-grid-small" uk-grid>
