@@ -53,12 +53,6 @@ $ajax_url = admin_url('admin-ajax.php');
                     </div>
                 </div>
                 <div class="uk-width-1-2">
-                    <label class="uk-form-label" for="uchb_budget_client_email">E-mail cliente</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-input" id="uchb_budget_client_email" type="email" placeholder="Ex: nomeempresa@empresa.com.br">
-                    </div>
-                </div>
-                <div class="uk-width-1-2">
                     <label class="uk-form-label" for="uchb_budget_client_name">Empresa / Prospect</label>
                     <div class="uk-form-controls">
                         <?php Uchb_Admin::uchb_select_list_companies();  ?>
@@ -72,3 +66,9 @@ $ajax_url = admin_url('admin-ajax.php');
         </div>
     </div>
 </div>
+
+<script>
+fetch('http://localhost/wp/wp-json/wp/v2/users')
+    .then( response => response.json() )
+    .then( data => console.log( JSON.stringify(data) ) );
+</script>

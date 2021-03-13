@@ -355,8 +355,7 @@ class Uchb_Admin {
 			update_post_meta( $post_id, 'uchb_budget_hours', $data[2] );
 			update_post_meta( $post_id, 'uchb_budget_deadline', $data[3] );
 			update_post_meta( $post_id, 'uchb_budget_price', $data[4] );
-			update_post_meta( $post_id, 'uchb_budget_client_email', $data[5] );
-			update_post_meta( $post_id, 'uchb_budget_client_name', $data[6] );
+			update_post_meta( $post_id, 'uchb_budget_client_name', $data[5] );
 		endif;
 		die();
 	}

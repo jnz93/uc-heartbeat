@@ -184,7 +184,6 @@ function registerBudget(ajaxUrl){
 		budgetHours 		= jQuery('#uchb_budget_hours').val(),
 		budgetDeadline 		= jQuery('#uchb_budget_deadline').val(),
 		budgetPrice 		= jQuery('#uchb_budget_price').val(),
-		budgetCustomerEmail = jQuery('#uchb_budget_client_email').val(),
 		budegtCustomerName 	= jQuery('#uchb_budget_client_name').val();
 
 	if (checkForm(form) === 0){
@@ -193,7 +192,6 @@ function registerBudget(ajaxUrl){
 					+ '||' + budgetHours
 					+ '||' + budgetDeadline
 					+ '||' + budgetPrice
-					+ '||' + budgetCustomerEmail
 					+ '||' + budegtCustomerName;
 
 		// Send to back end
