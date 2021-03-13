@@ -61,7 +61,7 @@ $ajax_url = admin_url('admin-ajax.php');
                 <div class="uk-width-1-2">
                     <label class="uk-form-label" for="uchb_budget_client_name">Empresa / Prospect</label>
                     <div class="uk-form-controls">
-                        <input class="uk-input" id="uchb_budget_client_name" type="text" placeholder="Ex: Nome da empresa / João Paulo">
+                        <?php Uchb_Admin::uchb_select_list_companies();  ?>
                     </div>
                 </div>
             </form>

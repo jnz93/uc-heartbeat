@@ -360,4 +360,28 @@ class Uchb_Admin {
 		endif;
 		die();
 	}
+
+	/**
+	 * Return select with companies registered
+	 * 
+	 * @since v1.0.1
+	 */
+	public function uchb_select_list_companies()
+	{
+		$users = get_users( array( 'role__in' => array( 'subscriber' ) ) );
+
+		if ( ! empty( $users ) ) :
+			echo '<select class="uk-select" id="uchb_budget_client_name"><option value="0" selected>Selecionar Cliente</option>';
+			foreach ( $users as $user ) :
+
+				$u_id 	= $user->ID;
+				$u_name = $user->user_nicename;
+				
+				echo '<option value="'. $u_id .'">'. $u_name .'</option>';
+
+			endforeach;
+			echo '</select>';
+		endif;
+		
+	}
 }
